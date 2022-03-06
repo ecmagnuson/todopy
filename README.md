@@ -1,3 +1,11 @@
+run the setup.sh script.
+It will create a '.todopy' directory in your home directory.
+inside of '.todopy' it will populate two text files: todo.txt and done.txt
+the todopy_dir will be exported to a todopy.cfg 
+Python will read in from the todopy.cfg for the filepaths. 
+
+
+
 This will hopefully be a functional version of the todo.txt project.
 
 I really like that project a lot but the shell executable script is 1500 lines of code and I was
