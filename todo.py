@@ -5,23 +5,18 @@ import todo_cfg
 
 def write_file(file, *args):
     with open(file, 'a') as file: #a instead of w is append :)
-            file.write(' '.join(*args)) 
+            file.write(' '.join(argv[2:])) 
             file.write('\n')                     #TODO make better new line
 
-def read_file(file):
+def read_file(file):                             #TODO get index to work
     with open(file, 'r') as file:
-        lines = file.read()
-
-    for line in lines:
-        print(line, end = '')                        #TODO figure out why i need end = ''
-
+        print(file.read())                
 
 if __name__ == '__main__':
     todo_txt = todo_cfg.todo_txt
     done_txt = todo_cfg.done_txt
 
-    #if dont use arg that makes sense give
-    if len(argv) == 1:
+    if len(argv) == 1: #argv 0 is the py file itself
         print("'man todopy' for usage")
         raise SystemExit(0)
 
