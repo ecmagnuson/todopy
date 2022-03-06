@@ -1,15 +1,11 @@
-#will need to fix this.
-todopy_dir="/home/elliott/.todopy/"
-todo_txt = '/home/elliott/.todopy/todo.txt'
-done_txt = '/home/elliott/.todopy/done.txt'
+todopy_dir ='/home/elliott/.todopy/'
+todo_txt = todopy_dir + 'todo.txt'
+done_txt = todopy_dir + 'done.txt'
 
 
 
 
-
-
-
-
+#how to package python code
 
 
 

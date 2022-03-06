@@ -1,9 +1,5 @@
 #!/bin/sh
 
-#If this horribly pains you to put in Home then feel free to change it. 
-#Be warned though, changing this rm -rf's your life...........
-#I hope can feel comfortable being able to do things in your home :)
-
 todo_dir=/home/"$USER"/.todopy
 
 echo -n "Want me to pick the default location for the todopy directory (~/.todopy) [y/n]? "
@@ -30,3 +26,4 @@ if [ "$answer" != "${answer#[Nn]}" ] ; then
 fi
 
 #eventually populate the todo.cfg file with the directories
+#make a man page and then move the man page to where it should go.
