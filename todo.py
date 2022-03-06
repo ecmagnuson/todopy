@@ -1,27 +1,32 @@
 #!/usr/bin/env python3
 
-import sys
+from sys import argv
 import todo_cfg
 
-todo_txt = todo_cfg.todo_txt
-done_txt = todo_cfg.done_txt
+def write_file(file, *args):
+    with open(file, 'a') as file: #a instead of w is append :)
+            file.write(' '.join(*args)) 
+            file.write('\n')                     #TODO make better new line
 
-if len(sys.argv) == 1: #It's index 1 - so if no arg passed
-    print("'man todopy' for usage")
-    raise SystemExit(0)
-
-#accept variable number of args
-
-if sys.argv[1] == 'a' or sys.argv[1] == 'add':
-    with open(todo_txt, 'a') as todo_txt: #a instead of w is append :)
-        todo_txt.write('\n') #This seems really sloppy but its the only way I can find to do it right now
-        todo_txt.write(' '.join(sys.argv[2:])) 
-
-if sys.argv[1] == 'l' or sys.argv[1] == 'ls':
-    with open(todo_txt, 'r') as todo_txt:
-        lines = todo_txt.read()
+def read_file(file):
+    with open(file, 'r') as file:
+        lines = file.read()
 
     for line in lines:
-        print(line, end = '') #Need to look at this later.
-        
+        print(line, end = '')                        #TODO figure out why i need end = ''
 
+
+if __name__ == '__main__':
+    todo_txt = todo_cfg.todo_txt
+    done_txt = todo_cfg.done_txt
+
+    #if dont use arg that makes sense give
+    if len(argv) == 1:
+        print("'man todopy' for usage")
+        raise SystemExit(0)
+
+    if argv[1] == 'a' or argv[1] == 'add':
+        write_file(todo_txt, argv[1:])
+        
+    if argv[1] == 'l' or argv[1] == 'ls':
+        read_file(todo_txt)
