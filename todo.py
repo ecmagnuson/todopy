@@ -3,15 +3,21 @@
 from sys import argv
 import todo_cfg
 
-def write_file(file, *args):
+def write_txt(file, *args):
     with open(file, 'a') as file: #a instead of w is append :)
-            file.write(' '.join(argv[2:])) 
-            file.write('\n')                     #TODO make better new line
-
-def read_file(file):                             #TODO get index to work
+        return file.write(' '.join(argv[2:]))                         #TODO new line
+            
+def read_txt(file):                                                  #TODO get index to work
     with open(file, 'r') as file:
-        print(file.read())                
+        return file.readlines()
 
+def remove_txt(file, line):
+    print(line)
+    lines = read_txt(file)
+    print(lines[1])
+    
+    
+    
 if __name__ == '__main__':
     todo_txt = todo_cfg.todo_txt
     done_txt = todo_cfg.done_txt
@@ -21,7 +27,10 @@ if __name__ == '__main__':
         raise SystemExit(0)
 
     if argv[1] == 'a' or argv[1] == 'add':
-        write_file(todo_txt, argv[1:])
+        print(write_txt(todo_txt, argv[1:]))
         
     if argv[1] == 'l' or argv[1] == 'ls':
-        read_file(todo_txt)
+        print(read_txt(todo_txt))
+
+    if argv[1] == 'd' or argv[1] == 'do':
+        remove_txt(todo_txt, argv[2])

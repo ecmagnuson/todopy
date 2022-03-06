@@ -2,9 +2,11 @@
 
 from sys import argv
 
-#print(*argv[1:])
+def remove_txt(file, line):
+    with open(file, 'r+') as file:
+        file.seek(line)
+        file.write('') #write over and remove
+        file.truncate()
 
-def write(*args):
-    print(*args)
+remove_txt('file.txt', 1)
 
-write(argv[1:])
