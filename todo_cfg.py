@@ -1,3 +1,19 @@
+#will need to fix this.
+todopy_dir="/home/elliott/.todopy/"
+todo_txt = '/home/elliott/.todopy/todo.txt'
+done_txt = '/home/elliott/.todopy/done.txt'
+
+
+
+
+
+
+
+
+
+
+
+
 #Add path to where you want your todo.txt and done.txt files to populate here
 #is a directory 
 #Enter full path!
