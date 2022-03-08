@@ -15,6 +15,7 @@ def remove_txt(file, line):
     print(line)
     lines = read_txt(file)
     print(lines[1])
+
     
     
     
@@ -25,7 +26,7 @@ if __name__ == '__main__':
     if len(argv) == 1: #argv 0 is the py file itself
         print("'man todopy' for usage")
         raise SystemExit(0)
-
+            
     if argv[1] == 'a' or argv[1] == 'add':
         print(write_txt(todo_txt, argv[1:]))
         
