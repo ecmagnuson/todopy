@@ -3,6 +3,10 @@
 from sys import argv
 import todo_cfg
 
+def write_str(file, string):
+    with open(file, 'a') as file:
+        file.write(string + '\n')
+
 def write_txt(file, *args):
     with open(file, 'a') as file:
         file.write(' '.join(argv[2:]) + '\n')  
@@ -29,3 +33,4 @@ if __name__ == '__main__':
     elif argv[1] == 'd' or argv[1] == 'do':
         line = read_line(todo_txt, int(argv[2]))
         print(line)
+        write_str(done_txt, line)
