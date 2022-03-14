@@ -9,9 +9,10 @@ def write_txt(file, *args):
             
 def read_txt(file):                                                  #TODO get index to work
     with open(file, 'r') as file:
-        return file.readlines()
-
-    
+        lines = file.readlines()
+    for line in lines:
+        print(line, end = '')
+  
 if __name__ == '__main__':
     todo_txt = todo_cfg.todo_txt
     done_txt = todo_cfg.done_txt
@@ -21,6 +22,6 @@ if __name__ == '__main__':
     elif argv[1] == 'a' or argv[1] == 'add':
         write_txt(todo_txt, argv[1:])    
     elif argv[1] == 'l' or argv[1] == 'ls':
-        print(read_txt(todo_txt))
+        read_txt(todo_txt)
     else:
         print("'man todopy' for usage")
