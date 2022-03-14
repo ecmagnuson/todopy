@@ -5,13 +5,13 @@ import todo_cfg
 
 def write_txt(file, *args):
     with open(file, 'a') as file: #a instead of w is append :)
-        file.write(' '.join(argv[2:]) + '\n')                         #TODO new line
+        file.write(' '.join(argv[2:]) + '\n')  
+                      
             
 def read_txt(file):                                                  #TODO get index to work
     with open(file, 'r') as file:
-        lines = file.readlines()
-    for line in lines:
-        print(line, end = '')
+        for line in file.readlines():
+            print(line, end = '') #TODO fix the end = ''
   
 if __name__ == '__main__':
     todo_txt = todo_cfg.todo_txt
