@@ -19,7 +19,7 @@ def read_line(file, line):
         return file.readlines()[line - 1]
 
 def remove_line(file, string):
-    '''Removed a line from a file'''
+    '''Remove a line from a file'''
     all_txt = read_all_lines(file)
     line_to_remove = read_line(file, string)
     with open(file, 'w') as file:
@@ -27,7 +27,13 @@ def remove_line(file, string):
             if line != line_to_remove:
                 file.write(line)
 
+#TODO -- write multiple items
+#TODO -- do multiple items
+#TODO -- print x of y listed
+#TODO -- working with string 
+
 if __name__ == '__main__':
+    #filepaths here
     todo_txt = todo_cfg.todo_txt
     done_txt = todo_cfg.done_txt
 
@@ -35,8 +41,7 @@ if __name__ == '__main__':
         print("'man todopy' for usage") 
     elif argv[1] == 'l' or argv[1] == 'ls':
         for i, line in enumerate(read_all_lines(todo_txt), 1):
-            print(i, line.replace("\n", ""))
-                  
+            print(i, line.replace("\n", ""))      
     elif argv[1] == 'a' or argv[1] == 'add':
         task = ' '.join(argv[2:])
         write_txt(todo_txt, task)    
