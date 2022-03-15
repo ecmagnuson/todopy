@@ -23,6 +23,8 @@ def read_txt(file, *args):
         #I need to make a \n for writing to file, but i have to 
         # manually remove here to transfer it to done.txt, which is clunky.
 
+
+
 def truncate_txt(file):
     return
 
@@ -45,5 +47,4 @@ if __name__ == '__main__':
         read_txt(todo_txt)
     elif argv[1] == 'd' or argv[1] == 'do':
         line = read_txt(todo_txt, int(argv[2]))
-        print(line)
         write_txt(done_txt, line)
