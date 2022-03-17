@@ -15,4 +15,4 @@ arguments = ' '.join(argv[2:]).split(', ')
 print(f'my arguments not split: {arguments}')
 
 for arg in arguments:
-    print(arg)
+    print(arg[0])

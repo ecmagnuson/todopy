@@ -31,6 +31,7 @@ def remove_line(file, string):
 #TODO -- do multiple items
 #TODO -- print x of y listed
 #TODO -- working with string 
+#TODO -- raise error when todo.txt is empty
 
 #read text and remove line are good example of how to do architecturally
 #read text
@@ -49,22 +50,19 @@ if __name__ == '__main__':
     todo_txt = todo_cfg.todo_txt
     done_txt = todo_cfg.done_txt
 
-    arguments = ' '.join(argv[2:]).split(', ')
+    arguments = ' '.join(argv[1:]).split(', ')
 
     for arg in arguments:
-
-
-        #need to replace all this
         if len(argv) == 1: #argv 0 is the py file itself
-            print("'man todopy' for usage") 
-
-        elif argv[1] == 'l' or argv[1] == 'ls':
+            print("''man todopy' for usage'") 
+        elif arg[0] == 'l' or arg[0] == 'ls':
             for i, line in enumerate(read_all_lines(todo_txt), 1):
                 print(i, line.replace("\n", ""))      
-        elif argv[1] == 'a' or argv[1] == 'add':
-            task = ' '.join(argv[2:])
-            write_txt(todo_txt, task)    
-        elif argv[1] == 'd' or argv[1] == 'do':
-            line = read_line(todo_txt, int(argv[2]))
+        elif arg[0] == 'a' or arg[0] == 'add':
+            write_txt(todo_txt, arg[1:].strip())    
+
+            
+        elif arg[0] == 'd' or arg[0] == 'do':
+            line = read_line(todo_txt, int(arg[1:].strip()))
             write_txt(done_txt, line.replace("\n", ""))
-            remove_line(todo_txt, int(argv[2]))
+            #remove_line(todo_txt, line) 
