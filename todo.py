@@ -32,6 +32,9 @@ def remove_line(file, string):
 #TODO -- print x of y listed
 #TODO -- working with string 
 
+#read text and remove line are good example of how to do architecturally
+#read text
+
 if __name__ == '__main__':
     #filepaths here
     todo_txt = todo_cfg.todo_txt
