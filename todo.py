@@ -2,6 +2,7 @@
 
 from sys import argv
 import os
+from datetime import datetime
 import todo_cfg
 
 def write_txt(file, string):
@@ -30,11 +31,14 @@ def remove_line(file, string):
             if line != string:
                 file.write(line)
 
+#TODO -- combine the read methods
 #TODO -- do multiple items
 #TODO -- print x of y listed
 #TODO -- raise error when todo.txt is empty
 #TODO -- do multiple dont shift the index until done.
 #TODO -- accept d and do
+#TODO -- add date when done
+#TODO -- d just 1 2 to do both
 
 #read text and remove line are good example of how to do architecturally
 #read text
@@ -46,22 +50,25 @@ def remove_line(file, string):
 #tp a thing to add, another thing, one more
 #tp a work this way too, d 2
 
-if __name__ == '__main__':
+if __name__ == '__main__':    
     #filepaths here
     todo_txt = todo_cfg.todo_txt
     done_txt = todo_cfg.done_txt
-
+    dt = datetime.now().strftime('%m/%d/%Y %H:%M:%S')
     arguments = ' '.join(argv[1:]).split(', ')
+    
+    print(f'arguments {arguments}')
 
     for arg in arguments:
         if len(argv) == 1: #argv 0 is the py file itself
-            print("''man todopy' for usage'") 
+            print('add usage later')                       #TODO  
         elif arg[0] == 'l' or arg[0] == 'ls':
             for i, line in enumerate(read_all_lines(todo_txt), 1):
-                print(i, line.replace("\n", ""))       
+                print(i, line.replace('\n', ''))       
         elif arg[0] == 'a' or arg[0] == 'add':
             write_txt(todo_txt, arg.split(' ', 1)[1])    
         elif arg[0] == 'd' or arg[0] == 'do':
-            line = read_line(todo_txt, int(arg[1:].strip()))
-            write_txt(done_txt, line.replace("\n", ""))
-            remove_line(todo_txt, line) 
+            print(f'args {arg}')
+            """ line = read_line(todo_txt, int(arg[1:].strip()))
+            write_txt(done_txt, line.replace('\n', ', ') + dt)
+            remove_line(todo_txt, line)  """
