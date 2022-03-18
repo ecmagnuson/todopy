@@ -7,12 +7,6 @@
 #if no commas then one argument
 
 
+string = 'hello there 1 2'
 
-from sys import argv
-
-arguments = ' '.join(argv[2:]).split(', ')
-
-print(f'my arguments not split: {arguments}')
-
-for arg in arguments:
-    print(arg[0])
+print(string.split(' '))

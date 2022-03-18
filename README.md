@@ -11,7 +11,6 @@ This will hopefully be a functional version of the todo.txt project.
 I really like that project a lot but the shell executable script is 1500 lines of code and I was
 thinking to myself: I don't need a todo system that does all that stuff.
 
-This script doesnt need any dependancies, because why would you need dependancies to make a simple todo manager?
 
 I just need a short simple script that can:
 

@@ -17,6 +17,7 @@ if [ "$answer" != "${answer#[Yy]}" ] ; then
         echo "I'm glad you feel comfortable being able to do things in your home"
         then mkdir "$todo_dir"
         touch ${todo_dir}/todo.txt ${todo_dir}/done.txt
+        echo "task, date" >> ${todo_dir}/done.txt
     fi
 fi
 
