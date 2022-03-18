@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from sys import argv
+import os
 import todo_cfg
 
 def write_txt(file, string):
@@ -10,6 +11,8 @@ def write_txt(file, string):
                  
 def read_all_lines(file):   
     #Reads all the lines from a file  
+    if os.stat(file).st_size == 0:
+        print('todo file is empty')
     with open(file, 'r') as file: 
         return file.readlines()
 
@@ -21,17 +24,17 @@ def read_line(file, line):
 def remove_line(file, string):
     #Remove a line from a file
     all_txt = read_all_lines(file)
-    line_to_remove = read_line(file, string)
+    #line_to_remove = read_line(file, string)
     with open(file, 'w') as file:
         for line in all_txt:
-            if line != line_to_remove:
+            if line != string:
                 file.write(line)
 
-#TODO -- write multiple items
 #TODO -- do multiple items
 #TODO -- print x of y listed
-#TODO -- working with string 
 #TODO -- raise error when todo.txt is empty
+#TODO -- do multiple dont shift the index until done.
+#TODO -- accept d and do
 
 #read text and remove line are good example of how to do architecturally
 #read text
@@ -40,10 +43,8 @@ def remove_line(file, string):
 # loop through each argument.
 #arguments are already a list. Just need to separate by ""
 
-
 #tp a thing to add, another thing, one more
 #tp a work this way too, d 2
-
 
 if __name__ == '__main__':
     #filepaths here
@@ -60,9 +61,7 @@ if __name__ == '__main__':
                 print(i, line.replace("\n", ""))      
         elif arg[0] == 'a' or arg[0] == 'add':
             write_txt(todo_txt, arg[1:].strip())    
-
-            
         elif arg[0] == 'd' or arg[0] == 'do':
             line = read_line(todo_txt, int(arg[1:].strip()))
             write_txt(done_txt, line.replace("\n", ""))
-            #remove_line(todo_txt, line) 
+            remove_line(todo_txt, line) 
