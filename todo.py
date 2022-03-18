@@ -53,13 +53,20 @@ if __name__ == '__main__':
 
     arguments = ' '.join(argv[1:]).split(', ')
 
+    #s.split(" ", 1)
+    #split string by first space so can use add or a
+
     for arg in arguments:
         if len(argv) == 1: #argv 0 is the py file itself
             print("''man todopy' for usage'") 
         elif arg[0] == 'l' or arg[0] == 'ls':
             for i, line in enumerate(read_all_lines(todo_txt), 1):
-                print(i, line.replace("\n", ""))      
+                print(i, line.replace("\n", ""))  
+                    
         elif arg[0] == 'a' or arg[0] == 'add':
+            print(arg)
+            print(arg.split(' ', 1))
+            print(arg.split(' ', 1)[1])
             write_txt(todo_txt, arg[1:].strip())    
         elif arg[0] == 'd' or arg[0] == 'do':
             line = read_line(todo_txt, int(arg[1:].strip()))
