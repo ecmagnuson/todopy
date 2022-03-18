@@ -17,19 +17,30 @@ def read_all_lines(file):
     with open(file, 'r') as file: 
         return file.readlines()
 
-def read_line(file, line):
-    #Reads one or more lines from a file
-    with open(file, 'r') as file: 
-        return file.readlines()[line - 1]
+def read_line(file, line_num) -> str:
+    #Reads one line from a file
+    return read_all_lines(file)[line_num - 1]
 
 def remove_line(file, string):
     #Remove a line from a file
     all_txt = read_all_lines(file)
     #line_to_remove = read_line(file, string)
+    #keep track before removing
     with open(file, 'w') as file:
         for line in all_txt:
             if line != string:
                 file.write(line)
+
+def remove_lines(file, line_list):
+    line_list = ['a', 'b']
+    all_txt = read_all_lines(file)
+    with open(file, 'w') as file:
+        for line in all_txt:
+            #if str in array then dont write the line
+            #update this line to check for matches inside of line_list.  -- TODO
+            if line != string:
+                file.write(line)
+
 
 #TODO -- combine the read methods
 #TODO -- do multiple items
@@ -39,6 +50,8 @@ def remove_line(file, string):
 #TODO -- accept d and do
 #TODO -- add date when done
 #TODO -- d just 1 2 to do both
+#TODO -- ls functionality
+#TODO -- add do add what should happen
 
 #read text and remove line are good example of how to do architecturally
 #read text
@@ -50,13 +63,22 @@ def remove_line(file, string):
 #tp a thing to add, another thing, one more
 #tp a work this way too, d 2
 
+#if no args match then print usage.
+#doc strings for return value
+#type hints
+#list done on certain date. lsd
+#
+
+#group all adjacent dos togethor and make single method call to remove_lines
+
+
 if __name__ == '__main__':    
     #filepaths here
     todo_txt = todo_cfg.todo_txt
     done_txt = todo_cfg.done_txt
     dt = datetime.now().strftime('%m/%d/%Y %H:%M:%S')
+
     arguments = ' '.join(argv[1:]).split(', ')
-    
     print(f'arguments {arguments}')
 
     for arg in arguments:
@@ -64,11 +86,11 @@ if __name__ == '__main__':
             print('add usage later')                       #TODO  
         elif arg[0] == 'l' or arg[0] == 'ls':
             for i, line in enumerate(read_all_lines(todo_txt), 1):
-                print(i, line.replace('\n', ''))       
+                print(i, line.replace('\n', ''))                  
         elif arg[0] == 'a' or arg[0] == 'add':
             write_txt(todo_txt, arg.split(' ', 1)[1])    
         elif arg[0] == 'd' or arg[0] == 'do':
             print(f'args {arg}')
-            """ line = read_line(todo_txt, int(arg[1:].strip()))
+            line = read_line(todo_txt, int(arg[1:].strip()))
             write_txt(done_txt, line.replace('\n', ', ') + dt)
-            remove_line(todo_txt, line)  """
+            remove_line(todo_txt, line)
