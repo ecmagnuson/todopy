@@ -6,6 +6,11 @@ from datetime import datetime
 from typing import List, TextIO
 import todo_cfg
 
+def file_is_empty(file: TextIO) -> bool:
+    if stat(file).st_size == 0:
+        return True
+    return False
+
 def write_txt(file: TextIO, string: str) -> None:
     '''Writes a string to a text file, leaves a new line
 
@@ -26,9 +31,9 @@ def read_all_lines(file: TextIO) -> List[str]:
     Returns:
         A str list of all of the lines
     '''
-    if stat(file).st_size == 0:
-        print('todo file is empty')
     with open(file, 'r') as f: 
+        if file_is_empty(file):
+            print('The file is empty.')
         return f.readlines()
 
 def read_line(file: TextIO, line_num: int) -> str:
@@ -54,32 +59,13 @@ def remove_line(file: TextIO, line_list: List[str]) -> None:
     Returns:
         None
     '''
-
     all_txt = read_all_lines(file)
-
     with open(file, 'w') as f:
         for line in all_txt:
             if line not in line_list:
                 f.write(line)
 
 
-#use read line to return the line at line_num loop to add to list then if in list remove.
-#get a list of all of the strings to remove then remove those lines
-#So loop through all of the line_nums 1st then remove the lines. 
-
-""" def remove_lines(file, line_list):
-    line_list = ['a', 'b']
-    all_txt = read_all_lines(file)
-    with open(file, 'w') as file:
-        for line in all_txt:
-            #if str in array then dont write the line
-            #update this line to check for matches inside of line_list.  -- TODO
-            if line != string:
-                file.write(line) """
-
-
-#TODO -- combine the read methods
-#TODO -- do multiple items
 #TODO -- print x of y listed
 #TODO -- raise error when todo.txt is empty
 #TODO -- do multiple dont shift the index until done.
@@ -125,12 +111,12 @@ if __name__ == '__main__':
         elif arg[0] == 'a' or arg[0] == 'add':
             write_txt(todo_txt, arg.split(' ', 1)[1])    
         elif arg[0] == 'd' or arg[0] == 'do':
+            if file_is_empty(todo_txt):
+                print('Todo file is empty -- you cannot do this task.') 
+                break
             line = read_line(todo_txt, int(arg[1:].strip()))
             lines_to_remove.append(line)
-
             dt = datetime.now().strftime('%m/%d/%Y %H:%M:%S')
-
             write_txt(done_txt, line.replace('\n', ', ') + dt)
-
-    if len(lines_to_remove) > 0:
+    if lines_to_remove:
         remove_line(todo_txt, lines_to_remove)
