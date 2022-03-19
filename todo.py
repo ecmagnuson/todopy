@@ -107,7 +107,6 @@ def remove_lines(file, line_list):
 if __name__ == '__main__':    
     todo_txt = todo_cfg.todo_txt
     done_txt = todo_cfg.done_txt
-    dt = datetime.now().strftime('%m/%d/%Y %H:%M:%S')
 
     arguments = ' '.join(argv[1:]).split(', ')
     print(f'arguments {arguments}')
@@ -121,7 +120,7 @@ if __name__ == '__main__':
         elif arg[0] == 'a' or arg[0] == 'add':
             write_txt(todo_txt, arg.split(' ', 1)[1])    
         elif arg[0] == 'd' or arg[0] == 'do':
-            print(f'args {arg}')
             line = read_line(todo_txt, int(arg[1:].strip()))
+            dt = datetime.now().strftime('%m/%d/%Y %H:%M:%S')
             write_txt(done_txt, line.replace('\n', ', ') + dt)
             remove_line(todo_txt, line)
