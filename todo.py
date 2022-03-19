@@ -38,6 +38,15 @@ def print_tasks_shown(file: TextIO) -> None:
     '''
     pass
 
+def alphabetize_file(file: TextIO) -> None:
+    '''Alphabetizes the items in a text file.
+
+    Args:   
+        file: The file to alphabetize
+    Returns:
+        None 
+    '''
+
 
 
 def file_is_empty(file: TextIO) -> bool:
