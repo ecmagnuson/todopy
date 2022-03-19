@@ -42,7 +42,7 @@ def read_line(file: TextIO, line_num: int) -> str:
     '''
     return read_all_lines(file)[line_num - 1]
 
-def remove_line(file: TextIO, string: str) -> None:
+def remove_line(file: TextIO, line_list: List[str]) -> None:
     '''Removes all instances of a string line from a file
 
     Calls the read_all_lines method and stores all the lines in a variable 'all_txt'
@@ -54,16 +54,20 @@ def remove_line(file: TextIO, string: str) -> None:
     Returns:
         None
     '''
+
     all_txt = read_all_lines(file)
+
     with open(file, 'w') as f:
         for line in all_txt:
-            if line != string:
+            if line not in line_list:
                 f.write(line)
 
 
+#use read line to return the line at line_num loop to add to list then if in list remove.
+#get a list of all of the strings to remove then remove those lines
+#So loop through all of the line_nums 1st then remove the lines. 
 
-
-def remove_lines(file, line_list):
+""" def remove_lines(file, line_list):
     line_list = ['a', 'b']
     all_txt = read_all_lines(file)
     with open(file, 'w') as file:
@@ -71,7 +75,7 @@ def remove_lines(file, line_list):
             #if str in array then dont write the line
             #update this line to check for matches inside of line_list.  -- TODO
             if line != string:
-                file.write(line)
+                file.write(line) """
 
 
 #TODO -- combine the read methods
@@ -107,6 +111,7 @@ def remove_lines(file, line_list):
 if __name__ == '__main__':    
     todo_txt = todo_cfg.todo_txt
     done_txt = todo_cfg.done_txt
+    lines_to_remove = []
 
     arguments = ' '.join(argv[1:]).split(', ')
     print(f'arguments {arguments}')
@@ -121,6 +126,11 @@ if __name__ == '__main__':
             write_txt(todo_txt, arg.split(' ', 1)[1])    
         elif arg[0] == 'd' or arg[0] == 'do':
             line = read_line(todo_txt, int(arg[1:].strip()))
+            lines_to_remove.append(line)
+
             dt = datetime.now().strftime('%m/%d/%Y %H:%M:%S')
+
             write_txt(done_txt, line.replace('\n', ', ') + dt)
-            remove_line(todo_txt, line)
+
+    if len(lines_to_remove) > 0:
+        remove_line(todo_txt, lines_to_remove)
