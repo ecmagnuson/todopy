@@ -72,12 +72,10 @@ def remove_line(file: TextIO, line_list: List[str]) -> None:
             if line not in line_list:
                 f.write(line)
 
-
+#TODO -- list out context
 #TODO -- print x of y listed
 #TODO -- accept d and do
-#TODO -- add date when done
 #TODO -- d just 1 2 to do both
-#TODO -- ls functionality
 #TODO -- add do add what should happen
 
 #read text and remove line are good example of how to do architecturally
@@ -94,10 +92,7 @@ def remove_line(file: TextIO, line_list: List[str]) -> None:
 #doc strings for return value
 #type hints
 #list done on certain date. lsd
-#
-
 #group all adjacent dos togethor and make single method call to remove_lines
-
 
 if __name__ == '__main__':    
     todo_txt = todo_cfg.todo_txt
@@ -119,7 +114,7 @@ if __name__ == '__main__':
             if file_is_empty(todo_txt):
                 print('Todo file is empty -- you cannot do this task.') 
                 raise SystemExit(1)
-            line = read_line(todo_txt, int(arg[1:].strip()))
+            line = read_line(todo_txt, int(arg.split(' ', 1)[1]))
             lines_to_remove.append(line)
             dt = datetime.now().strftime('%m/%d/%Y %H:%M:%S')
             write_txt(done_txt, line.replace('\n', ', ') + dt)
