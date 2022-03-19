@@ -7,6 +7,13 @@ from typing import List, TextIO
 import todo_cfg
 
 def file_is_empty(file: TextIO) -> bool:
+    ''' Checks if a text file is empty
+
+    Args:
+        file: the file to check
+    Returns:
+        True if the file is empty. False if it is not empty 
+    '''
     if stat(file).st_size == 0:
         return True
     return False
