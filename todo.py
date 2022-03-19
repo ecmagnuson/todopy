@@ -55,10 +55,10 @@ def read_line(file: TextIO, line_num: int) -> str:
     return read_all_lines(file)[line_num - 1]
 
 def remove_line(file: TextIO, line_list: List[str]) -> None:
-    '''Removes all instances of a string line from a file
+    '''Removes entire line with exact matches of all str from list[str] in file
 
     Calls the read_all_lines method and stores all the lines in a variable 'all_txt'
-    Opens the file in write mode and rewrites all of the strings to the file -- except the line to remove
+    Opens the file in write mode and rewrites all of the strings to the file -- skips over str in line_list
 
     Args:
         file: The text file to remove a line from
@@ -74,8 +74,6 @@ def remove_line(file: TextIO, line_list: List[str]) -> None:
 
 
 #TODO -- print x of y listed
-#TODO -- raise error when todo.txt is empty
-#TODO -- do multiple dont shift the index until done.
 #TODO -- accept d and do
 #TODO -- add date when done
 #TODO -- d just 1 2 to do both
@@ -120,7 +118,7 @@ if __name__ == '__main__':
         elif arg[0] == 'd' or arg[0] == 'do':
             if file_is_empty(todo_txt):
                 print('Todo file is empty -- you cannot do this task.') 
-                break
+                raise SystemExit(1)
             line = read_line(todo_txt, int(arg[1:].strip()))
             lines_to_remove.append(line)
             dt = datetime.now().strftime('%m/%d/%Y %H:%M:%S')
