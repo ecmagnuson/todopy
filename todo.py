@@ -3,33 +3,65 @@
 from sys import argv
 import os
 from datetime import datetime
+from typing import List, TextIO
 import todo_cfg
 
-def write_txt(file, string):
-    #Write one line to file with newline
+def write_txt(file: TextIO, string: str) -> None:
+    '''Writes a string to a text file, leaves a new line
+
+    Args:
+        file: the file to write to
+        string: the str to add to the file
+    Returns:
+        None
+    '''
     with open(file, 'a') as file:
         file.write(string + '\n')
                  
-def read_all_lines(file):   
-    #Reads all the lines from a file  
+def read_all_lines(file: TextIO) -> List[str]:   
+    ''' Returns a str list of all the lines from a file. 
+
+    Args:
+        file: the text file to read from.
+    Returns:
+        A str list of all of the lines
+    '''
     if os.stat(file).st_size == 0:
         print('todo file is empty')
     with open(file, 'r') as file: 
         return file.readlines()
 
-def read_line(file, line_num) -> str:
-    #Reads one line from a file
+def read_line(file: TextIO, line_num: int) -> str:
+    '''Returns the string on one line of a file. 
+
+    Args:
+        file: the text file to read from
+        line_num: the line number to read from. File starts at index 1
+    Returns:
+        the string at the specific line number of the text file
+    '''
     return read_all_lines(file)[line_num - 1]
 
-def remove_line(file, string):
-    #Remove a line from a file
+def remove_line(file: TextIO, string: str) -> None:
+    '''Removes all instances of a string line from a file
+
+    Calls the read_all_lines method and stores all the lines in a variable 'all_txt'
+    Opens the file in write mode and rewrites all of the strings to the file -- except the line to remove
+
+    Args:
+        file: The text file to remove a line from
+        string: The string to remove from the file
+    Returns:
+        None
+    '''
     all_txt = read_all_lines(file)
-    #line_to_remove = read_line(file, string)
-    #keep track before removing
     with open(file, 'w') as file:
         for line in all_txt:
             if line != string:
                 file.write(line)
+
+
+
 
 def remove_lines(file, line_list):
     line_list = ['a', 'b']
@@ -73,7 +105,6 @@ def remove_lines(file, line_list):
 
 
 if __name__ == '__main__':    
-    #filepaths here
     todo_txt = todo_cfg.todo_txt
     done_txt = todo_cfg.done_txt
     dt = datetime.now().strftime('%m/%d/%Y %H:%M:%S')
