@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from sys import argv
-import os
+from os import stat
 from datetime import datetime
 from typing import List, TextIO
 import todo_cfg
@@ -15,8 +15,8 @@ def write_txt(file: TextIO, string: str) -> None:
     Returns:
         None
     '''
-    with open(file, 'a') as file:
-        file.write(string + '\n')
+    with open(file, 'a') as f:
+        f.write(string + '\n')
                  
 def read_all_lines(file: TextIO) -> List[str]:   
     ''' Returns a str list of all the lines from a file. 
@@ -26,10 +26,10 @@ def read_all_lines(file: TextIO) -> List[str]:
     Returns:
         A str list of all of the lines
     '''
-    if os.stat(file).st_size == 0:
+    if stat(file).st_size == 0:
         print('todo file is empty')
-    with open(file, 'r') as file: 
-        return file.readlines()
+    with open(file, 'r') as f: 
+        return f.readlines()
 
 def read_line(file: TextIO, line_num: int) -> str:
     '''Returns the string on one line of a file. 
@@ -55,10 +55,10 @@ def remove_line(file: TextIO, string: str) -> None:
         None
     '''
     all_txt = read_all_lines(file)
-    with open(file, 'w') as file:
+    with open(file, 'w') as f:
         for line in all_txt:
             if line != string:
-                file.write(line)
+                f.write(line)
 
 
 
