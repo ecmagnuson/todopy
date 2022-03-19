@@ -6,6 +6,40 @@ from datetime import datetime
 from typing import List, TextIO
 import todo_cfg
 
+def print_all_contexts(file: TextIO) -> None:
+    '''prints all unique contexts - '@' - that I have in text file
+
+    Args:
+        file: the file to check
+    Returns:
+        None
+    '''
+    pass
+
+def print_context(file: TextIO, context: str) -> None:
+    '''prints all str lines with param context in them
+
+    Args:
+        file: The file to check
+        context: The context to locate
+    Returns:
+        None
+    '''
+    pass
+
+def print_tasks_shown(file: TextIO) -> None:
+    ''' prints the # of tasks shown out of total tasks
+    count context and total
+
+    Args:
+        file: The file to check
+    Returns:
+        None 
+    '''
+    pass
+
+
+
 def file_is_empty(file: TextIO) -> bool:
     ''' Checks if a text file is empty
 
@@ -74,9 +108,10 @@ def remove_line(file: TextIO, line_list: List[str]) -> None:
 
 #TODO -- list out context
 #TODO -- print x of y listed
-#TODO -- accept d and do
 #TODO -- d just 1 2 to do both
 #TODO -- add do add what should happen
+#TODO -- group all args togethor? 
+#TODO -- make main as bare as possible
 
 #read text and remove line are good example of how to do architecturally
 #read text
