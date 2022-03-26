@@ -30,6 +30,8 @@ def print_context(file: TextIO, context: str) -> None:
         if '@' in line:
             if context in line:
                 print(line.replace('\n', ''))
+                return
+    print('No such context')
 
 def print_tasks_shown(file: TextIO) -> None:
     ''' prints the # of tasks shown out of total tasks
@@ -51,7 +53,11 @@ def alphabetize_file(file: TextIO) -> None:
         None 
     '''
 
-
+def check_todos_done(file: TextIO) -> int:
+    with open(file, 'r') as f:
+        for i, line in enumerate(f):
+            pass
+        return i
 
 def file_is_empty(file: TextIO) -> bool:
     ''' Checks if a text file is empty
@@ -148,11 +154,13 @@ if __name__ == '__main__':
     lines_to_remove = []
 
     arguments = ' '.join(argv[1:]).split(', ')
-    #print(f'arguments {arguments}')
+    #print(f'arguments {arguments[0]}')
 
     for arg in arguments:
         if len(argv) == 1: #argv 0 is the py file itself
             print('add usage later')                       #TODO  
+        elif arguments[0] == 'lsd':
+            print(check_todos_done(done_txt))
         elif arg[0] == 'l' or arg[0] == 'ls':
             if '@' in arguments[0]:
                 #print_context(todo_txt, arguments[0])
