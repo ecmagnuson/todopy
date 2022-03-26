@@ -25,7 +25,11 @@ def print_context(file: TextIO, context: str) -> None:
     Returns:
         None
     '''
-    pass
+    all_lines = read_all_lines(file)
+    for i, line in enumerate(all_lines, 1):
+        if '@' in line:
+            if context in line:
+                print(line.replace('\n', ''))
 
 def print_tasks_shown(file: TextIO) -> None:
     ''' prints the # of tasks shown out of total tasks
@@ -144,12 +148,18 @@ if __name__ == '__main__':
     lines_to_remove = []
 
     arguments = ' '.join(argv[1:]).split(', ')
-    print(f'arguments {arguments}')
+    #print(f'arguments {arguments}')
 
     for arg in arguments:
         if len(argv) == 1: #argv 0 is the py file itself
             print('add usage later')                       #TODO  
         elif arg[0] == 'l' or arg[0] == 'ls':
+            if '@' in arguments[0]:
+                #print_context(todo_txt, arguments[0])
+                arguments = str(arguments[0])
+                arguments = arguments[arguments.index('@') : ]
+                print_context(todo_txt, arguments)
+                break
             for i, line in enumerate(read_all_lines(todo_txt), 1):
                 print(i, line.replace('\n', ''))                  
         elif arg[0] == 'a' or arg[0] == 'add':
