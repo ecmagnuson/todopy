@@ -6,6 +6,9 @@ from datetime import datetime
 from typing import List, TextIO
 import todo_cfg
 
+#Maybe use this instead to refactor
+#https://docs.python.org/3/library/argparse.html
+
 def print_all_contexts(file: TextIO) -> None:
     '''prints all unique contexts - '@' - that I have in text file
 
