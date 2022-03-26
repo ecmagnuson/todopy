@@ -1,6 +1,7 @@
 #!/bin/sh
 
 todo_dir=/home/"$USER"/.todopy
+todo_tests=/home/"$USER"/.todopy/tests
 
 echo -n "Want me to pick the default location for the todopy directory (~/.todopy) [y/n]? "
 read answer
@@ -17,6 +18,7 @@ if [ "$answer" != "${answer#[Yy]}" ] ; then
         echo "I'm glad you feel comfortable being able to do things in your home"
         then mkdir "$todo_dir"
         touch ${todo_dir}/todo.txt ${todo_dir}/done.txt
+        touch ${todo_tests}/todo_test.txt ${todo_tests}/done_test.txt
         echo "task, date" >> ${todo_dir}/done.txt
     fi
 fi

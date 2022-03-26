@@ -2,6 +2,10 @@ todopy_dir ='/home/elliott/.todopy/'
 todo_txt = todopy_dir + 'todo.txt'
 done_txt = todopy_dir + 'done.txt'
 
+todo_test ='/home/elliott/.todopy/tests'
+test_txt = todo_test + 'todo_test.txt'
+done_txt = todo_test + 'done_test.txt'
+
 
 
 
