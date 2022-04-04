@@ -19,3 +19,7 @@ Functionality:
 7. Can add and remove with one line
 8. Shows the items in order they were added
 9. Count the amount of tasks I've completed - for fun :D
+
+TODO: Upon using this there are some things that really annoy me that I want to fix:
+1. I can't add a `, (comma)` to a thing to add, since a comma is a separator
+2. I want to do multiple things in this fashion `td 1 2 3` instead of `td 1, d 2, d 3`
