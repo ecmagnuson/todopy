@@ -79,6 +79,16 @@ def ls2(context: List[str]):
 			if (len(context) == 0 or has_one_of(context, line.split())):
 				print(i, line, end='')
 
+def ls_contexts():
+	contexts = []
+	with open(TODOFILE, 'r') as todo:
+		for line in todo.readlines():
+			if line.strip(' \r\n') == '':
+				continue # ignore empty (deleted) lines
+			if not line[line.index('@') + 1 :].strip() in contexts:
+				contexts.append(line[line.index('@') + 1 :].strip())
+	print(contexts)
+
 def validate_contexts(contexts: List[str]):
 	pass
 
@@ -86,7 +96,7 @@ def to_ids(str_ids: List[str]):
 	return [int(id) for id in str_ids]
 
 def now_date():
-	return datetime.now().strftime('%m/%d/%Y %H:%M:%S')
+	return datetime.now().strftime(', %m/%d/%Y %H:%M:%S')
 
 def done(ids: List[int]):
 	todos = []
@@ -124,12 +134,14 @@ if __name__ == '__main__':
 		setup()
 		
 	cmd = sys.argv[1]
-	print(cmd)
+	#print(cmd) debugging
 
 	if cmd == 'ls' or cmd == 'l':
 		contexts = sys.argv[2:]
 		validate_contexts(contexts)
 		ls(contexts)
+	elif cmd == 'lsc':
+		ls_contexts()
 	elif cmd == 'add' or cmd == 'a':
 		add(sys.argv[2:])
 	elif cmd == 'do' or cmd == 'd':
