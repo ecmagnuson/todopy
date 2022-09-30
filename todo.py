@@ -79,6 +79,9 @@ def ls2(context: List[str]):
 			if (len(context) == 0 or has_one_of(context, line.split())):
 				print(i, line, end='')
 
+def get_context(line_num: List[int]):
+	return 
+
 def ls_contexts():
 	contexts = []
 	with open(TODOFILE, 'r') as todo:
@@ -126,6 +129,17 @@ def lsdone():
 		for i, line in enumerate(done.readlines()):
 			print(line, end='')
 
+def get_context_last_done():
+	with open(DONEFILE, 'rb') as done:
+		try:
+			done.seek(-2, os.SEEK_END)
+			while done.read(1) != b'\n':
+				done.seek(-2, os.SEEK_CUR)
+		except OSError:
+			done.seek(0)
+		last_line = done.readline().decode()
+		return last_line[last_line.index('@') : last_line.index(',') - 1]
+
 if __name__ == '__main__':
 	if len(sys.argv) == 1:
 		print('No commands found..')
@@ -147,6 +161,9 @@ if __name__ == '__main__':
 	elif cmd == 'do' or cmd == 'd':
 		ids = to_ids(sys.argv[2:])
 		done(ids)
+		os.system('cls' if os.name == 'nt' else 'clear')
+		ls(get_context_last_done()) #reprints list with specific context of last done
+
 	elif cmd == 'lsdone' or cmd == 'lsd':
 		lsdone()
 	elif cmd == 'reset':
