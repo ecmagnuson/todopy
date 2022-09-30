@@ -90,7 +90,7 @@ def ls_contexts():
 				continue # ignore empty (deleted) lines
 			if not line[line.index('@') + 1 :].strip() in contexts:
 				contexts.append(line[line.index('@') + 1 :].strip())
-	print(contexts)
+	print(sorted(contexts))
 
 def validate_contexts(contexts: List[str]):
 	pass
