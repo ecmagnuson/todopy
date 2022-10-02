@@ -80,7 +80,14 @@ def ls2(context: List[str]):
 				print(i, line, end='')
 
 def get_context(line_num: List[int]):
-	return 
+	'''get context of a line in file '''
+	#open the file. Find the line. Read the context
+	todo_lines = []
+	with open(TODOFILE, 'r') as todo:
+		todo_lines = todo.readlines()
+		line_w_context = todo_lines[line_num[0]]
+		context = line_w_context[line_w_context.index('@') : ]
+	return context.strip(' \r\n')
 
 def ls_contexts():
 	contexts = []
@@ -129,17 +136,6 @@ def lsdone():
 		for i, line in enumerate(done.readlines()):
 			print(line, end='')
 
-def get_context_last_done():
-	with open(DONEFILE, 'rb') as done:
-		try:
-			done.seek(-2, os.SEEK_END)
-			while done.read(1) != b'\n':
-				done.seek(-2, os.SEEK_CUR)
-		except OSError:
-			done.seek(0)
-		last_line = done.readline().decode()
-		return last_line[last_line.index('@') : last_line.index(',') - 1]
-
 if __name__ == '__main__':
 	if len(sys.argv) == 1:
 		print('No commands found..')
@@ -159,11 +155,11 @@ if __name__ == '__main__':
 	elif cmd == 'add' or cmd == 'a':
 		add(sys.argv[2:])
 	elif cmd == 'do' or cmd == 'd':
-		ids = to_ids(sys.argv[2:])
-		done(ids)
-		os.system('cls' if os.name == 'nt' else 'clear')
-		ls(get_context_last_done()) #reprints list with specific context of last done
-
+		ids = to_ids(sys.argv[2:]) #list of the id.
+		done_context = [(get_context(ids))] #get the context from the id
+		print(done_context)
+		done(ids) #do it
+		ls(done_context) #print out the context BUG here
 	elif cmd == 'lsdone' or cmd == 'lsd':
 		lsdone()
 	elif cmd == 'reset':
