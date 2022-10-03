@@ -79,7 +79,7 @@ def ls2(context: List[str]):
 			if (len(context) == 0 or has_one_of(context, line.split())):
 				print(i, line, end='')
 
-def get_context(line_num: List[int]):
+def get_context(line_num: List[int]) -> str:
 	'''get context of a line in file '''
 	#open the file. Find the line. Read the context
 	todo_lines = []
@@ -102,10 +102,10 @@ def ls_contexts():
 def validate_contexts(contexts: List[str]):
 	pass
 
-def to_ids(str_ids: List[str]):
+def to_ids(str_ids: List[str]) -> List[int]:
 	return [int(id) for id in str_ids]
 
-def now_date():
+def now_date() -> str:
 	return datetime.now().strftime(', %m/%d/%Y %H:%M:%S')
 
 def done(ids: List[int]):
